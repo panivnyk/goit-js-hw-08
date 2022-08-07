@@ -6,16 +6,14 @@ const player = new Player(iframe);
 
 player.on(
   'timeupdate',
-  throttle(event => {
-    localStorage.setItem('videoplayer-current-time', event.seconds);
+  throttle(({ duration, percent, seconds }) => {
+    localStorage.setItem('videoplayer-current-time', `${seconds}`);
   }, 1000)
 );
 
 player
   .setCurrentTime(localStorage.getItem('videoplayer-current-time'))
-  .then(function (seconds) {
-    // seconds = the actual time that the player seeked to
-  })
+  .then(function (seconds) {})
   .catch(function (error) {
     switch (error.name) {
       case 'RangeError':
