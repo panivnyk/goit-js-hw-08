@@ -4,10 +4,6 @@ import { throttle } from 'lodash';
 const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
 
-player.on('play', function () {
-  console.log('played the video!');
-});
-
 player.on(
   'timeupdate',
   throttle(event => {
@@ -17,6 +13,14 @@ player.on(
 
 player
   .setCurrentTime(localStorage.getItem('videoplayer-current-time'))
+  .then(function (seconds) {
+    // seconds = the actual time that the player seeked to
+  })
   .catch(function (error) {
-    console.error(error);
+    switch (error.name) {
+      case 'RangeError':
+        break;
+      default:
+        break;
+    }
   });
