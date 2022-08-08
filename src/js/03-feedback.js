@@ -23,9 +23,13 @@ form.addEventListener('submit', submitMessage);
 
 function submitMessage(event) {
   event.preventDefault();
+
   const {
     elements: { email, message },
   } = event.currentTarget;
+  if (email.value === '' || message.value === '') {
+    return alert('Check the entered data - all fields must be filled! ');
+  }
   console.log({ email: email.value, message: message.value });
 
   event.currentTarget.reset();
